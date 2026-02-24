@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Akthar | Portfolio</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #1c1c1c;
+        color: #fff;
+      }
+
+      /* NAVBAR */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: #111;
+        z-index: 1000;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 10%;
+      }
+      .logo {
+        font-size: 22px;
+        font-weight: 600;
+        color: #ff5a5f;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+      nav ul a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 14px;
+      }
+      nav ul a:hover {
+        color: #ff5a5f;
+      }
+
+      section {
+        padding: 100px 10%;
+      }
+
+      /* HOME */
+      .home {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .profile-wrapper {
+        position: relative;
+        width: 160px;
+        height: 160px;
+        margin-bottom: 20px;
+      }
+      .profile-img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 4px solid #ff5a5f;
+        background: #2a2a2a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        font-weight: bold;
+        color: #ff5a5f;
+        overflow: hidden;
+      }
+      .profile-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .upload-icon {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #ff5a5f;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: 2px solid #fff;
+        transition: 0.3s;
+      }
+      .upload-icon.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      .fileInput {
+        display: none;
+      }
+      .home h1 {
+        font-size: 34px;
+      }
+      .home p {
+        margin: 6px 0;
+      }
+      .social a {
+        margin: 0 8px;
+        color: #ff5a5f;
+        text-decoration: none;
+      }
+      .btn {
+        margin-top: 15px;
+        padding: 10px 28px;
+        background: #ff5a5f;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn:hover {
+        background: #e04a4f;
+      }
+
+      /* ABOUT - CENTERED TEXT ONLY */
+      .about h2 {
+        margin-bottom: 40px;
+        color: #ccc;
+        text-align: center;
+      }
+      .about-card {
+        background: #2a2a2a;
+        padding: 40px;
+        border-radius: 15px;
+        max-width: 760px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .about-card p {
+        font-size: 15px;
+        line-height: 1.8;
+        color: #ddd;
+      }
+
+      /* SERVICES */
+      .services h2 {
+        margin-bottom: 40px;
+        color: #ccc;
+        text-align: center;
+      }
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+      }
+      .service-card {
+        padding: 30px;
+        border-radius: 18px;
+        text-align: center;
+      }
+      .service-card h3 {
+        margin-bottom: 10px;
+      }
+      .service-card p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .blue {
+        background: #6c6ce5;
+      }
+      .yellow {
+        background: #f9d648;
+        color: #000;
+      }
+      .pink {
+        background: #ff7a8a;
+      }
+
+      /* EXPERIENCE */
+      .experience h2,
+      .projects h2,
+      .contact h2 {
+        margin-bottom: 40px;
+        color: #ccc;
+        text-align: center;
+      }
+      .experience-container {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+      .exp-list {
+        flex: 1;
+        max-width: 260px;
+      }
+      .exp-item {
+        padding: 15px;
+        background: #222;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        color: #bbb;
+      }
+      .exp-item.active {
+        background: #2a2a2a;
+        color: #ff5a5f;
+      }
+      .exp-content {
+        flex: 3;
+        background: #2a2a2a;
+        padding: 30px;
+        border-radius: 18px;
+      }
+      .exp-content h3 {
+        margin-bottom: 8px;
+      }
+      .exp-content p {
+        color: #aaa;
+        margin-bottom: 15px;
+      }
+      .exp-content li {
+        margin-bottom: 10px;
+      }
+
+      /* PROJECTS */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+        margin-top: 20px;
+      }
+      .project-card {
+        background: #2a2a2a;
+        padding: 25px;
+        border-radius: 15px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(255, 90, 95, 0.15);
+      }
+      .project-card h3 {
+        color: #ff5a5f;
+        margin-bottom: 12px;
+      }
+      .project-card p {
+        color: #ccc;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 8px;
+      }
+      .project-card small {
+        color: #888;
+      }
+      .filter-buttons {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .filter-buttons .btn {
+        margin: 0 8px;
+        background: #444;
+      }
+
+      /* CONTACT */
+      .contact {
+        background: #111;
+        border-radius: 20px;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 50px 40px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      }
+      .contact h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+      .contact-subtitle {
+        font-size: 18px;
+        color: #ccc;
+        margin-bottom: 8px;
+      }
+      .contact-info {
+        font-size: 14px;
+        color: #aaa;
+        margin-bottom: 30px;
+      }
+      .contact-info a {
+        color: #ff5a5f;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .form-row .form-group {
+        flex: 1;
+        min-width: 200px;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 16px 20px;
+        background: #2a2a2a;
+        border: 2px solid #444;
+        border-radius: 50px;
+        color: #fff;
+        font-size: 16px;
+        transition: all 0.3s;
+      }
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #ff5a5f;
+        box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.2);
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: #888;
+      }
+      textarea {
+        border-radius: 20px;
+        min-height: 140px;
+        resize: vertical;
+      }
+      .submit-btn {
+        width: 100%;
+        padding: 16px;
+        background: #ff5a5f;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .submit-btn:hover {
+        background: #e04a4f;
+        transform: translateY(-2px);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        nav ul {
+          display: none;
+        }
+        .experience-container {
+          flex-direction: column;
+        }
+        .exp-list {
+          max-width: 100%;
+        }
+        .contact {
+          padding: 40px 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <div class="logo">Akthar</div>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- HOME -->
+    <section class="home" id="home">
+      <div class="profile-wrapper">
+        <div class="profile-img" id="homeAvatar">AK</div>
+        <div class="upload-icon" id="homeUploadIcon">📷</div>
+        <input
+          type="file"
+          id="homeFileInput"
+          class="fileInput"
+          accept="image/*"
+          hidden
+        />
+      </div>
+      <h1>Noorul Akthar A</h1>
+      <p>Java Full Stack Developer</p>
+      <p>📍 India | ✉️ noorulakthar2005@gmail.com</p>
+      <div class="social">
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+        <a href="#">LeetCode</a>
+      </div>
+      <a href="#contact" class="btn">Contact Me</a>
+    </section>
+
+    <!-- ABOUT - PHOTO REMOVED, CENTERED -->
+    <section class="about" id="about">
+      <h2>About Me</h2>
+      <div class="about-card">
+        <p>
+          Hello! I'm Akthar, a passionate Full Stack Developer skilled in
+          creating dynamic and scalable web applications. With expertise in
+          <strong>Java, C#, and SQL</strong>. I thrive on solving complex
+          challenges and building intuitive, user-focused solutions.
+          <br /><br />
+          I bring hands-on experience from internships and projects where I’ve
+          designed, developed, and deployed robust software systems. My
+          strengths lie in
+          <em>object-oriented programming, database management</em>, and
+          collaborating in <em>Agile environments</em> to deliver high-quality
+          results. I’m driven by a love for learning and innovation, constantly
+          exploring new technologies to stay ahead. Beyond coding, I enjoy
+          participating in workshops, presenting technical papers, and mentoring
+          peers.
+        </p>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+      <h2>Services</h2>
+      <div class="services-grid">
+        <div class="service-card blue">
+          <h3>Responsive Design</h3>
+          <p>Websites that adapt seamlessly across all devices.</p>
+        </div>
+        <div class="service-card yellow">
+          <h3>Full Stack Development</h3>
+          <p>Frontend + Backend solutions with scalability.</p>
+        </div>
+        <div class="service-card pink">
+          <h3>Guidance & Support</h3>
+          <p>Technical guidance and long-term project support.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="experience" id="experience">
+      <h2>Experience</h2>
+      <div class="experience-container">
+        <div class="exp-list" id="expList"></div>
+        <div class="exp-content" id="expContent"></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects" id="projects">
+      <h2>Recent Projects</h2>
+
+      <div class="filter-buttons">
+        <button class="btn" onclick="filterProjects('all')">All</button>
+        <button class="btn" onclick="filterProjects('academic')">
+          Academic
+        </button>
+        <button class="btn" onclick="filterProjects('freelance')">
+          Freelance
+        </button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        <div class="project-card" data-category="academic">
+          <h3>Ablus Learning Platform</h3>
+          <p>
+            Crafting innovative learning solutions that ignite your potential.
+          </p>
+          <p><strong>Tech:</strong> HTML, CSS, JavaScript, Responsive Design</p>
+          <p><small>Category: Academic / Learning Platform</small></p>
+        </div>
+
+        <div class="project-card" data-category="freelance">
+          <h3>Ashik Interiors</h3>
+          <p>Modern interior design showcase with elegant dark theme.</p>
+          <p><strong>Tech:</strong> HTML, CSS, JavaScript, Responsive Layout</p>
+          <p><small>Category: Freelance</small></p>
+        </div>
+
+        <div class="project-card" data-category="freelance">
+          <h3>Christmas Gift Website</h3>
+          <p>Festive gift-sending platform with animated gift elements.</p>
+          <p><strong>Tech:</strong> HTML, CSS, JavaScript, Animations</p>
+          <p><small>Category: Freelance</small></p>
+        </div>
+
+        <div class="project-card" data-category="academic">
+          <h3>Tic-Tac-Toe Game</h3>
+          <p>Classic two-player game with timer and win detection.</p>
+          <p><strong>Tech:</strong> HTML, CSS, JavaScript (DOM)</p>
+          <p><small>Category: Academic / Mini Project</small></p>
+        </div>
+
+        <div class="project-card" data-category="academic">
+          <h3>Weather App</h3>
+          <p>Real-time weather display for any city (example: Delhi).</p>
+          <p><strong>Tech:</strong> HTML, CSS, JavaScript, Weather API</p>
+          <p><small>Category: Academic / API Integration</small></p>
+        </div>
+
+        <div class="project-card" data-category="academic">
+          <h3>Detectify – Intrusion Detection System</h3>
+          <p>Network simulation-based intrusion detection system.</p>
+          <p><strong>Tech:</strong> NS2, TCL, C++, NAM</p>
+          <p><small>Category: Academic</small></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <h2>Get In Touch</h2>
+      <p class="contact-subtitle">Let's talk about everything!</p>
+      <p class="contact-info">
+        Don't like forms?
+        <a href="mailto:noorulakthar2005@gmail.com">Send an Email</a> 👋
+      </p>
+
+      <form>
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" placeholder="Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="text" placeholder="Subject" required />
+        </div>
+
+        <div class="form-group">
+          <textarea placeholder="Your message here..." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </section>
+
+    <script>
+      // ===== HOME UPLOAD =====
+      const homeUploadIcon = document.getElementById("homeUploadIcon");
+      const homeFileInput = document.getElementById("homeFileInput");
+      const homeAvatar = document.getElementById("homeAvatar");
+
+      homeUploadIcon.addEventListener("click", () => homeFileInput.click());
+
+      homeFileInput.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        homeUploadIcon.classList.add("disabled");
+        homeUploadIcon.textContent = "⏳";
+
+        setTimeout(() => {
+          const reader = new FileReader();
+          reader.onload = function (ev) {
+            homeAvatar.innerHTML = `<img src="${ev.target.result}" alt="Profile">`;
+            localStorage.setItem("homeProfile", ev.target.result);
+            homeUploadIcon.classList.remove("disabled");
+            homeUploadIcon.textContent = "📷";
+          };
+          reader.readAsDataURL(file);
+        }, 1500);
+      });
+
+      // ===== LOAD SAVED IMAGE =====
+      window.addEventListener("load", function () {
+        const homeSaved = localStorage.getItem("homeProfile");
+        if (homeSaved)
+          homeAvatar.innerHTML = `<img src="${homeSaved}" alt="Profile">`;
+      });
+
+      // ===== EXPERIENCE TABS =====
+      const experiences = [
+        {
+          title: "Frontend Developer",
+          company: "Infosys Springboard",
+          years: "Dec 2024 - Present",
+          info: [
+            "Frontend Developer in a Scrum team developing PlanNGo-Hub using Angular",
+            "Created responsive UI with HTML5 and CSS3",
+            "Worked in Agile methodology using Git & GitHub",
+          ],
+        },
+        {
+          title: "C# Intern",
+          company: "Optimus Technocrates",
+          years: "May 2023 - Jun 2023",
+          info: [
+            "Developed data management portal using React.js & Material UI",
+            "Improved system performance and deployment efficiency",
+            "Managed project plans and client expectations",
+          ],
+        },
+        {
+          title: "Java Developer Intern",
+          company: "Codveda Technologies",
+          years: "Dec 2025 - Jan 2026",
+          info: [
+            "Worked on real-world Java development projects",
+            "Contributed to testing and problem-solving",
+          ],
+        },
+      ];
+
+      const list = document.getElementById("expList");
+      const content = document.getElementById("expContent");
+
+      function loadExp(exp, index) {
+        const div = document.createElement("div");
+        div.className = "exp-item" + (index === 0 ? " active" : "");
+        div.innerText = exp.company;
+        div.onclick = () => {
+          document
+            .querySelectorAll(".exp-item")
+            .forEach((i) => i.classList.remove("active"));
+          div.classList.add("active");
+          showExp(exp);
+        };
+        list.appendChild(div);
+      }
+
+      function showExp(exp) {
+        content.innerHTML = `
+          <h3>${exp.title} @ ${exp.company}</h3>
+          <p>${exp.years}</p>
+          <ul>${exp.info.map((i) => `<li>${i}</li>`).join("")}</ul>
+        `;
+      }
+
+      experiences.forEach((exp, i) => loadExp(exp, i));
+      showExp(experiences[0]);
+
+      // ===== PROJECT FILTER =====
+      function filterProjects(category) {
+        const cards = document.querySelectorAll(".project-card");
+        cards.forEach((card) => {
+          if (category === "all") {
+            card.style.display = "block";
+          } else {
+            card.style.display =
+              card.getAttribute("data-category") === category
+                ? "block"
+                : "none";
+          }
+        });
+      }
+
+      filterProjects("all");
+    </script>
+  </body>
+</html>
